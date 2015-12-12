@@ -18,4 +18,16 @@ class DatabaseSeeder extends Seeder
 
         Model::reguard();
     }
+
+    /**
+     * Omplir taula users
+     */
+    private function seedUserTable()
+    {
+        $user = new User();
+        $user->name = "Adam Alvarado";
+        $user->email = "adamalvarado@iesebre.com";
+        $user->password = bcrypt(env('PASSWORD_ESTIMAT', '123456'));
+        $user->save();
+    }
 }
