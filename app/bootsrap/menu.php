@@ -17,7 +17,7 @@ MenuWithAuthentication::menu('home')
     ->title('Home')
     ->icon('fa-dashboard')
     ->url('/home')
-    ->rol('home')
+    ->role('home')
     ->permission('home')
     ->user('adamalvarado');
 
@@ -37,4 +37,4 @@ MenuWithAuthentication::menu('link4')
     ->icon('fa-dashboard')
     ->url('http://www.google.com');
 
-$menuHome = MenuWithAuthentication::menu('home');
+//$menuHome = MenuWithAuthentication::menu('home');
