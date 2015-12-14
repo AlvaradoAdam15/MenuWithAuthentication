@@ -9,6 +9,7 @@ namespace MenuWithAuthentication\Http\ViewComposers;
  * Time: 17:10
  */
 use Illuminate\Contracts\View\View;
+use MenuWithAuthentication\MenuWithAuthentication;
 
 /**
  * Class SidebarComposer
@@ -22,7 +23,11 @@ class SidebarComposer
 
     private function getSidebarMenu()
     {
-     $menu = MenuWithAuthentication::instance()->getMenu();
+     $menu =
+         MenuWithAuthentication::instance()
+             ->getMenu();
      return array();
     }
+
+
 }

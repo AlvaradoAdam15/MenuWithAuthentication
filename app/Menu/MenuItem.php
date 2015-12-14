@@ -9,23 +9,54 @@
 namespace MenuWithAuthentication\Menu;
 
 
+/**
+ * Class MenuItem
+ * @package MenuWithAuthentication\Menu
+ */
 class MenuItem
 {
+    /**
+     * @var
+     */
     protected $title;
+    /**
+     * @var null
+     */
     protected $icon = null;
+    /**
+     * @var
+     */
     protected $role;
+    /**
+     * @var null
+     */
     protected $url = null;
+    /**
+     * @var
+     */
     protected $user;
+    /**
+     * @var
+     */
     protected $permission;
+    /**
+     * @var
+     */
+    private $id;
 
     /**
      * MenuItem constructor.
      */
-    public function __construct()
+    public function __construct($id)
     {
 
+        $this->id = $id;
     }
 
+    /**
+     * @param null $title
+     * @return $this
+     */
     public function title($title=null)
     {
         if ($title == null){
@@ -36,6 +67,10 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @param null $icon
+     * @return $this|null
+     */
     public function icon($icon=null)
     {
         if ($icon == null){
@@ -46,6 +81,10 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @param null $role
+     * @return $this
+     */
     public function role($role=null)
     {
         if (role == null){
@@ -56,6 +95,10 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @param null $permission
+     * @return $this
+     */
     public function permission($permission=null)
     {
         if (permission == null){
@@ -66,6 +109,10 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @param null $url
+     * @return $this|null
+     */
     public function url($url=null)
     {
         if (url == null){
@@ -76,6 +123,10 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @param null $user
+     * @return $this
+     */
     public function user($user=null)
     {
         if (user == null){
@@ -86,17 +137,24 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function _toString()
     {
         return $this->render();
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $data = array();
         $data['url'] = $this->url;
         $data['icon'] = $this->icon;
         $data['title'] = $this->title;
+        $data['id'] = $this->id;
         // $data['role'] = $this->role;
         // $data['permission'] = $this->permission;
         // $data['user'] = $this->user;
