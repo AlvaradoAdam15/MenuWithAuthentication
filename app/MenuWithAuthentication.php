@@ -24,6 +24,11 @@ class MenuWithAuthentication
     protected static $instance = null;
 
     /**
+     * @var MenuItem[]
+     */
+    protected $menu;
+
+    /**
      * MenuWithAuthentication constructor.
      */
     public function __construct()
@@ -43,10 +48,10 @@ class MenuWithAuthentication
     /**
      * @return null|static
      */
-    public static function instance()
+    public static function instance($id)
     {
         if (is_null(static::$instance)){
-            return static::$instance = new static;
+            return static::$instance = new static($id);
         }
 
         return static::$instance;
@@ -57,6 +62,6 @@ class MenuWithAuthentication
      */
     public function getMenu()
     {
-        return array();
+        return $this->menu->items();
     }
 }

@@ -16,6 +16,10 @@ namespace MenuWithAuthentication\Menu;
 class MenuItem
 {
     /**
+     * @var MenuItem
+     */
+    protected static $current = null;
+    /**
      * @var
      */
     protected $title;
@@ -39,6 +43,15 @@ class MenuItem
      * @var
      */
     protected $permission;
+
+    /**
+     * @var
+     */
+    protected $subItems;
+    /**
+     * @var
+     */
+    protected $level;
     /**
      * @var
      */
@@ -51,6 +64,38 @@ class MenuItem
     {
 
         $this->id = $id;
+
+        if (is_null(static::$current)){
+            static::$current = $this;
+            $this->level(0);
+        } else {
+            static::$current->addItem($this);
+            $this->level(static::$current->level() + 1);
+        }
+    }
+
+    /**
+     * @param $item
+     * @return $this
+     */
+    public function addItem($item)
+    {
+        $this->subItems[] = $item;
+        return $this;
+    }
+
+    /**
+     * @param null $level
+     * @return $this
+     */
+    public function level($level = null)
+    {
+        if ($level == null){
+            return $this->level;
+        }
+
+        $this->leavel = $level;
+        return $this;
     }
 
     /**
@@ -160,5 +205,13 @@ class MenuItem
         // $data['user'] = $this->user;
 
         return (String) view('menu.menuitem', $data);
+    }
+
+    public function items()
+    {
+        $old = static::$current;
+        static::$current = $this;
+        static::$current = $old;
+        return $this;
     }
 }
