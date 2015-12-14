@@ -10,22 +10,24 @@
 //url
 //Icona
 //Té submenus
-
 //Home
-MenuWithAuthentication::menu()->title('Home')->icon('fa-dashboard');
+MenuWithAuthentication::menu()
+    ->title('Home')
+    ->icon('fa-dashboard')
+    ->url('/home')
+    ->rol('home')
+    ->permission('home')
+    ->user('adamalvarado');
 //Another link
 MenuWithAuthentication::menu()
-    ->title('Anhother Link')
+    ->title('Another link')
     ->user(5);
-
+;
 //Multilevel
 MenuWithAuthentication::menu()->title('Multilevel')->icon('fa-credit-card');
-    MenuWithAuthentication::menu()->title('Link in leavel 1')->icon('fa-briefcase');
-    MenuWithAuthentication::menu()->title('Link in leavel 2')->icon('fa-user');
-
+MenuWithAuthentication::menu()->title('Link in level 2')->icon('fa-briefcase');
+MenuWithAuthentication::menu()->title('Link in level 2')->icon('fa-user');
 MenuWithAuthentication::menu()
-    ->title('Ultom menú')
+    ->title('Últim menú')
     ->icon('fa-dashboard')
-    ->url('http://www.google.com')
-    ->rol('home')
-    ->permission('home');
+    ->url('http://www.google.com');

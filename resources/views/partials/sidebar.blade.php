@@ -41,9 +41,13 @@
                 </ul>
             </li>
 
+            @foreach ($menu as $menuitem)
+                {{ $menuitem }}
+            @endforeach
+
             <!--
             foreach(){
-                
+
             }
             -->
 
