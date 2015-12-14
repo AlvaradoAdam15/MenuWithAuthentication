@@ -1,6 +1,6 @@
 <?php
 
-namespace MenuWithAuthentication\Http;
+namespace MenuWithAuthentication\Http\ViewComposers;
 
 /**
  * Created by PhpStorm.
@@ -17,6 +17,12 @@ class SidebarComposer
 {
     public function compose(View $view)
     {
-        $view->with('menu',array());
+        $view->with('menu',$this->getSidebarMenu());
+    }
+
+    private function getSidebarMenu()
+    {
+     $menu = MenuWithAuthentication::instance()->getMenu();
+     return array();
     }
 }
