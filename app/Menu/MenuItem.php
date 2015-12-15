@@ -6,8 +6,8 @@
  * Time: 17:47
  */
 
-namespace MenuWithAuthentication\Menu;
 
+namespace MenuWithAuthentication\Menu;
 
 /**
  * Class MenuItem
@@ -16,66 +16,67 @@ namespace MenuWithAuthentication\Menu;
 class MenuItem
 {
     /**
-     * @var MenuItem
-     */
-    protected static $current = null;
-    /**
      * @var
      */
     protected $title;
-    /**
-     * @var null
-     */
-    protected $icon = null;
     /**
      * @var
      */
     protected $role;
     /**
-     * @var null
+     * @var
+     */
+    protected $icon = null;
+    /**
+     * @var
      */
     protected $url = null;
     /**
      * @var
      */
+    protected $permission;
+    /**
+     * @var
+     */
     protected $user;
     /**
-     * @var
+     * Current menu item
+     * @var MenuItem
      */
-    protected $permission;
-
-    /**
-     * @var
-     */
-    protected $subItems;
-    /**
-     * @var
-     */
-    protected $level;
+    public static $current;
     /**
      * @var
      */
     private $id;
-
+    /**
+     * Menu item depth level
+     * @var int
+     */
+    protected $level;
+    /**
+     * Menu item subitems
+     * @var MenuItem[]
+     */
+    protected $subItems = [];
     /**
      * MenuItem constructor.
      */
     public function __construct($id)
     {
-
         $this->id = $id;
-
-        if (is_null(static::$current)){
+        if (is_null(static::$current))
+        {
             static::$current = $this;
             $this->level(0);
-        } else {
+        } else
+        {
             static::$current->addItem($this);
             $this->level(static::$current->level() + 1);
         }
     }
-
     /**
-     * @param $item
+     * Add subitem
+     * @param MenuItem $item
      * @return $this
      */
     public function addItem($item)
@@ -83,113 +84,99 @@ class MenuItem
         $this->subItems[] = $item;
         return $this;
     }
-
     /**
-     * @param null $level
-     * @return $this
+     * Get or set menu item depth level
+     * @param int|null $level
+     * @return $this|int
      */
     public function level($level = null)
     {
-        if ($level == null){
+        if ($level == null)
+        {
             return $this->level;
         }
-
-        $this->leavel = $level;
+        $this->level = $level;
         return $this;
     }
-
     /**
      * @param null $title
      * @return $this
      */
     public function title($title=null)
     {
-        if ($title == null){
+        if ($title == null) {
             return $this->title;
         }
-
         $this->title = $title;
         return $this;
     }
-
     /**
      * @param null $icon
-     * @return $this|null
+     * @return $this
      */
     public function icon($icon=null)
     {
-        if ($icon == null){
+        if ($icon == null) {
             return $this->icon;
         }
-
-        $this->title = $icon;
+        $this->icon = $icon;
         return $this;
     }
-
+    /**
+     * @param null $url
+     * @return $this
+     */
+    public function url($url=null)
+    {
+        if ($url == null) {
+            return $this->url;
+        }
+        $this->url = $url;
+        return $this;
+    }
     /**
      * @param null $role
      * @return $this
      */
     public function role($role=null)
     {
-        if (role == null){
+        if ($role == null) {
             return $this->role;
         }
-
-        $this->title = $role;
+        $this->role = $role;
         return $this;
     }
-
     /**
      * @param null $permission
      * @return $this
      */
     public function permission($permission=null)
     {
-        if (permission == null){
+        if ($permission == null) {
             return $this->permission;
         }
-
-        $this->title = $permission;
+        $this->permission = $permission;
         return $this;
     }
-
-    /**
-     * @param null $url
-     * @return $this|null
-     */
-    public function url($url=null)
-    {
-        if (url == null){
-            return $this->url;
-        }
-
-        $this->title = $url;
-        return $this;
-    }
-
     /**
      * @param null $user
      * @return $this
      */
     public function user($user=null)
     {
-        if (user == null){
+        if ($user == null) {
             return $this->user;
         }
-
-        $this->title = $user;
+        $this->user = $user;
         return $this;
     }
-
     /**
      * @return string
      */
-    public function _toString()
+    public function __toString()
     {
         return $this->render();
     }
-
     /**
      * @return string
      */
@@ -200,13 +187,15 @@ class MenuItem
         $data['icon'] = $this->icon;
         $data['title'] = $this->title;
         $data['id'] = $this->id;
-        // $data['role'] = $this->role;
-        // $data['permission'] = $this->permission;
-        // $data['user'] = $this->user;
-
-        return (String) view('menu.menuitem', $data);
+//        $data['permission'] = $this->permission;
+//        $data['role'] = $this->role;
+//        $data['user'] = $this->user;
+        return (String) view('menu.menuitem',$data);
     }
-
+    /**
+     * Get or set menu item subitems
+     *
+     */
     public function items()
     {
         $old = static::$current;
